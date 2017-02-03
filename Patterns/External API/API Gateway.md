@@ -3,37 +3,36 @@
 
 ## Context
 
-想象一下你正在使用微服务架构模式（Microservice architecture pattern）构建一个在线商城，你当前正在实现一个产品明细页面。你需要开发多个版本的产品明细用户接口（User Interface）：
+我们假设你使用微服务架构模式（Microservice architecture pattern）构建一个在线商城，并正在实现产品详情页面。你需要开发多个版本的商品详情用户界面（User Interface）：
 
-* 基于HTML5/JavaScript的桌面和移动端浏览器UI - 服务端Web应用生成HTML
-* Native Android和iPhone客户端 - 这些客户端通过REST APIs跟服务端进行交互
+* 用于桌面和手机浏览器的基于HTML5/JavaScript的UI - HTML通过服务端Web应用生产
+* 本地Android和iPhone客户端 - 这些客户端通过REST API与服务器进行交互
 
-另外，在线商城还必须暴露产品明细REST API给第三方应用使用。
+另外，在线商城还应该通过REST API为第三方应用公开商品详情。
 
-一个产品明细UI要能够展示大量的产品信息。举例来说，Amazon.com上[《POJOs in Action》](https://www.amazon.com/POJOs-Action-Developing-Applications-Lightweight/dp/1932394583)明细页面展示如下信息：
-* 书籍的基础信息，比如，标题，作者，价格，等。
+产品详情UI可以展示商品的许多信息。比如，Amazon.com上[《POJOs in Action》](https://www.amazon.com/POJOs-Action-Developing-Applications-Lightweight/dp/1932394583)详情页面展示：
+* 书籍的基本信息，比如，标题，作者，价格等。
 * 你的书籍购买历史
-* 产品可获得性信息（Availability）
+* 是否有货（Availability）
 * 购买选项（Buying option）
-* 经常跟这本书一起买的商品列表
-* 购买这本书的顾客也同时购买商品列表
-* 顾客评论（Customer Reviews）
+* 经常跟这本书一起买的商品
+* 购买这本书的顾客也同时购买商品
+* 用户评论（Customer Reviews）
 * 销售排行版
 * ......
 
-因为在线商城使用微服务架构模式，因此产品明细数据会涵盖多个服务。
-举例来说，
-* 产品信息服务 - 产品基础信息，例如标题，作者
-* 价格服务 - 产品价格
-* 订单服务 - 产品购买历史
-* 库存服务 - 产品可获得性信息
-* 评论服务 - 顾客评论
+因为在线商城使用微服务架构模式，因此商品详情数据通过多个服务展开。比如：
+* 商品信息服务 - 商品基本信息，如标题，作者
+* 价格服务 - 商品价格
+* 订单服务 - 商品购买历史
+* 库存服务 - 产品是否有货
+* 评论服务 - 用户评论
 * ......
 
-因此，展示产品明细的代码必须从所有这些服务中获取信息。
+因此，展示产品详情的代码需要从所有这些服务获取信息。
 
 ## Problem
-如何让这些基于微服务应用的客户端访问各种个性化服务（Individual Services）？
+基于微服务应用的客户端如何访问这些独立服务（Individual Services）？
 
 ## Forces
 * 微服务提供的APIs粒度跟客户端需要的通常是不一样的。微服务通常提供细粒度（fine-grained）的APIs，这意味着客户端需要跟多个服务进行交互。举例来说，如上所述，客户端所需要的产品明细（数据）需要从很多的服务中获取。
