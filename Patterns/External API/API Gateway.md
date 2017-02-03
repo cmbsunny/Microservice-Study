@@ -65,7 +65,7 @@ API Gateway模式有一些缺点：
 * 如何实现API Gateway？如果需要规模处理高负载，时间驱动/响应的方法（event-driven/reactive approach）是最佳选择。在JVM上，基于NIO的库，例如Netty,Spring Reactor，等。有道理。NodeJS也是一个选择。
 
 ## Related patterns
-* API Gateway使用客户端发现模式（Client-side Discovery pattern）或者服务端发现模式（Server-side Discovery pattern）路由请求到可用的服务实例。
+* API Gateway使用[客户端发现模式](/Microservice-Study/Patterns/Service discovery/Client-side discovery.md)（Client-side Discovery pattern）或者服务端发现模式（Server-side Discovery pattern）路由请求到可用的服务实例。
 * API Gateway需要认证用户并传输包含用户信息的Access Token到服务。
 * API Gateway应该使用断路器（Circuit Breaker）调用服务。
 
