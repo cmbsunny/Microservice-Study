@@ -43,3 +43,4 @@
 * 服务划分（Partitioning into Services）能够随时变化且应该对客户端透明。
 
 ##Solution
+实现一个API Gateway作为所有客户端的唯一入口点（single entry point）。API Gateway以两种方式处理请求。一些请求简单的代理（proxy）/路由（route）到对应的服务。其他请求则被展开成多个服务（调用）。
