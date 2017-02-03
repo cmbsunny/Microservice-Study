@@ -44,7 +44,7 @@
 
 ## Solution
 实现一个API Gateway作为所有客户端的唯一入口点（single entry point）。API Gateway以两种方式处理请求。一些请求简单的代理（proxy）/路由（route）到对应的服务。其他请求则被展开成多个服务（调用）。
-![Use an API gateway](http://microservices.io/i/apigateway.jpg)
+![Use an API gateway](/Patterns/External API/apigateway.jpg)
 而不是提供一个一体适用（one-size-fits-all）的API，相反，API gateway为每个客户端暴露不同的API。举例来说，[Netflix API](http://techblog.netflix.com/2012/07/embracing-differences-inside-netflix.html) Gateway通过特定客户端适配代码（client-specific adapter code）为每个客户端提供最契合它们需求的API。
 API Gateway还必须实现安全（Security），例如，验证客户端是否被授权执行请求。
 
