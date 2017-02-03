@@ -42,6 +42,26 @@
 * 服务实例（Service Instance）的数量和位置（host + port）动态变化
 * 服务划分（Partitioning into Services）能够随时变化且应该对客户端透明。
 
-##Solution
+## Solution
 实现一个API Gateway作为所有客户端的唯一入口点（single entry point）。API Gateway以两种方式处理请求。一些请求简单的代理（proxy）/路由（route）到对应的服务。其他请求则被展开成多个服务（调用）。
 ![Use an API gateway](http://microservices.io/i/apigateway.jpg)
+而不是提供一个一体适用（one-size-fits-all）的API，相反，API gateway为每个客户端暴露不同的API。举例来说，[Netflix API](http://techblog.netflix.com/2012/07/embracing-differences-inside-netflix.html) Gateway通过特定客户端适配代码（client-specific adapter code）为每个客户端提供最契合它们需求的API。
+API Gateway还必须实现安全（Security），例如，验证客户端是否被授权执行请求。
+
+## Example
+[Netflix API Gateway](http://techblog.netflix.com/2013/01/optimizing-netflix-api.html)
+
+## Resulting context
+使用API Gateway有如下有点：
+* 隔离客户端与应用的微服务划分
+* 隔离客户端与服务实例位置测定问题
+* 为每个客户端提供最适宜的API
+* 减少请求往返次数。举例来说，API Gateway允许客户端通过一次（请求）往返获取多个服务的数据。更少的请求意味着更低的负载和提升用户体验。对移动应用来说API Gateway是必不可少的。
+* 简化客户端，通过将访问多个服务的逻辑从客户端迁移到API Gateway。
+API Gateway模式有一些缺点：
+* 增加复杂性 - API Gateway也是另一个活动部件（moving part），需要被开发、部署和管理
+* 增加响应时间，由于通过API Gateway而产生的额外网络跃点（Network Hop） - 但是，对于大部分应用来说这些额外的（请求）往返不重要。
+问题：
+* 如何实现API Gateway？如果需要规模处理高负载，时间驱动/响应的方法（event-driven/reactive approach）是最佳选择。在JVM上，基于NIO的库，例如Netty,Spring Reactor，等。有道理。NodeJS也是一个选择。
+
+## Related patterns
